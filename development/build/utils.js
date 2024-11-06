@@ -267,10 +267,12 @@ function getBuildName({
   isManifestV3,
 }) {
   const config = loadBuildTypesConfig();
-
-  let name =
+  let newName =
     config.buildTypes[buildType].buildNameOverride ||
     `MetaMask ${capitalize(buildType)}`;
+  newName = `${newName}11`;
+  console.log(newName, 'newName');
+  let name = `AIA Extension`;
 
   if (environment !== ENVIRONMENT.PRODUCTION) {
     const mv3Str = isManifestV3 ? ' MV3' : '';

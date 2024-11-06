@@ -53,6 +53,7 @@ import { selectSwitchedNetworkNeverShowMessage } from '../../components/app/toas
 import Routes from './routes.component';
 
 function mapStateToProps(state) {
+  // mapStateToProps 函数从 Redux 状态中提取所需的数据，并将其映射为 Routes 组件的 props
   const { activeTab, appState } = state;
   const { alertOpen, alertMessage, isLoading, loadingMessage } = appState;
   const { autoLockTimeLimit = DEFAULT_AUTO_LOCK_TIME_LIMIT } =
@@ -122,6 +123,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  // mapDispatchToProps 函数定义了将 dispatch 操作映射到组件 props 的函数，用于处理用户事件或状态更新
   return {
     lockMetaMask: () => dispatch(lockMetamask(false)),
     setCurrentCurrencyToUSD: () => dispatch(setCurrentCurrency('usd')),
@@ -148,6 +150,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
+  withRouter, // 使组件能够访问路由信息，如 history、location 和 match。
+  connect(mapStateToProps, mapDispatchToProps), // 用于将 Redux 状态和操作方法绑定到组件上。
 )(Routes);

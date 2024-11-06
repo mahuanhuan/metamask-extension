@@ -85,12 +85,18 @@ export default function OnboardingFlow() {
     const newSecretRecoveryPhrase = await dispatch(
       createNewVaultAndGetSeedPhrase(password),
     );
+    console.log(newSecretRecoveryPhrase, 'newSecretRecoveryPhrase');
     setSecretRecoveryPhrase(newSecretRecoveryPhrase);
   };
 
   const handleUnlock = async (password) => {
+    console.log(password, 'password==handleUnlock');
     const retrievedSecretRecoveryPhrase = await dispatch(
       unlockAndGetSeedPhrase(password),
+    );
+    console.log(
+      retrievedSecretRecoveryPhrase,
+      'retrievedSecretRecoveryPhrase==handleUnlock',
     );
     setSecretRecoveryPhrase(retrievedSecretRecoveryPhrase);
     history.push(nextRoute);

@@ -1183,7 +1183,7 @@ export default class MetamaskController extends EventEmitter {
       cacheEncryptionKey: true,
       keyringBuilders: additionalKeyrings,
       state: initState.KeyringController,
-      encryptor: opts.encryptor || encryptorFactory(600_000),
+      encryptor: opts.encryptor || encryptorFactory(600_000), // 表示设置一个加密器，可能会包含缓存策略（例如缓存 600,000 毫秒，或 10 分钟）；该加密器使用密码来生成加密密钥，然后用该密钥对钱包的私钥和其他敏感信息进行加密
       messenger: keyringControllerMessenger,
     });
 
