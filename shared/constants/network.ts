@@ -85,6 +85,8 @@ export const NETWORK_TYPES = {
   LINEA_GOERLI: 'linea-goerli',
   LINEA_SEPOLIA: 'linea-sepolia',
   LINEA_MAINNET: 'linea-mainnet',
+  AIA_MAINNET: 'aia-mainnet',
+  AIA_TESTNET: 'aia-testnet',
 } as const;
 
 /**
@@ -153,6 +155,8 @@ export const CHAIN_IDS = {
   ARBITRUM_SEPOLIA: '0x66eee',
   NEAR: '0x18d',
   NEAR_TESTNET: '0x18e',
+  AIA_TESTNET: '0x528',
+  AIA_MAINNET: '0x527',
 } as const;
 
 export const CHAINLIST_CHAIN_IDS_MAP = {
@@ -258,6 +262,8 @@ export const SCROLL_SEPOLIA_DISPLAY_NAME = 'Scroll Sepolia';
 export const OP_BNB_DISPLAY_NAME = 'opBNB';
 export const BERACHAIN_DISPLAY_NAME = 'Berachain Artio';
 export const METACHAIN_ONE_DISPLAY_NAME = 'Metachain One Mainnet';
+export const AIA_MAINNET_DISPLAY_NAME = 'AIA Mainnet';
+export const AIA_TESTNET_DISPLAY_NAME = 'AIA Testnet';
 
 export const infuraProjectId = process.env.INFURA_PROJECT_ID;
 export const getRpcUrl = ({
@@ -283,6 +289,13 @@ export const LINEA_SEPOLIA_RPC_URL = getRpcUrl({
 export const LINEA_MAINNET_RPC_URL = getRpcUrl({
   network: NETWORK_TYPES.LINEA_MAINNET,
 });
+export const AIA_MAINNET_RPC_URL = getRpcUrl({
+  network: NETWORK_TYPES.AIA_MAINNET,
+});
+export const AIA_TESTNET_RPC_URL = getRpcUrl({
+  network: NETWORK_TYPES.AIA_TESTNET,
+});
+
 export const LOCALHOST_RPC_URL = 'http://localhost:8545';
 
 /**
@@ -314,6 +327,7 @@ export const CURRENCY_SYMBOLS = {
   GLIMMER: 'GLMR',
   MOONRIVER: 'MOVR',
   ONE: 'ONE',
+  AIA: 'AIA',
 } as const;
 
 const CHAINLIST_CURRENCY_SYMBOLS_MAP = {
@@ -454,23 +468,29 @@ export const NUMBERS_TOKEN_IMAGE_URL = './images/numbers-token.png';
 export const SEI_IMAGE_URL = './images/sei.svg';
 export const NEAR_IMAGE_URL = './images/near.svg';
 export const APE_IMAGE_URL = './images/ape.svg';
+export const AIA_TESTNET_TOKEN_IMAGE_URL = './images/aia_logo.svg';
+export const AIA_MAINNET_TOKEN_IMAGE_URL = './images/aia_logo.svg';
 
 export const INFURA_PROVIDER_TYPES = [
   NETWORK_TYPES.MAINNET,
   NETWORK_TYPES.SEPOLIA,
   NETWORK_TYPES.LINEA_SEPOLIA,
   NETWORK_TYPES.LINEA_MAINNET,
+  NETWORK_TYPES.AIA_MAINNET,
+  NETWORK_TYPES.AIA_TESTNET,
 ] as const;
 
 export const TEST_CHAINS = [
   CHAIN_IDS.SEPOLIA,
   CHAIN_IDS.LINEA_SEPOLIA,
   CHAIN_IDS.LOCALHOST,
+  CHAIN_IDS.AIA_TESTNET,
 ];
 
 export const MAINNET_CHAINS = [
   { chainId: CHAIN_IDS.MAINNET, rpcUrl: MAINNET_RPC_URL },
   { chainId: CHAIN_IDS.LINEA_MAINNET, rpcUrl: LINEA_MAINNET_RPC_URL },
+  { chainId: CHAIN_IDS.AIA_MAINNET, rpcUrl: AIA_MAINNET_RPC_URL },
 ];
 
 const typedCapitalize = <K extends string>(k: K): Capitalize<K> =>
@@ -479,7 +499,7 @@ const typedCapitalize = <K extends string>(k: K): Capitalize<K> =>
 export const TEST_NETWORK_TICKER_MAP: {
   [K in Exclude<
     NetworkType,
-    'localhost' | 'mainnet' | 'rpc' | 'linea-mainnet'
+    'localhost' | 'mainnet' | 'rpc' | 'linea-mainnet' | 'aia-mainnet'
   >]: string;
 } = {
   [NETWORK_TYPES.GOERLI]: `${typedCapitalize(NETWORK_TYPES.GOERLI)}${
@@ -490,6 +510,7 @@ export const TEST_NETWORK_TICKER_MAP: {
   }`,
   [NETWORK_TYPES.LINEA_GOERLI]: `Linea${CURRENCY_SYMBOLS.ETH}`,
   [NETWORK_TYPES.LINEA_SEPOLIA]: `Linea${CURRENCY_SYMBOLS.ETH}`,
+  [NETWORK_TYPES.AIA_TESTNET]: `${CURRENCY_SYMBOLS.AIA}`, // todo ??
 };
 
 /**
@@ -515,6 +536,16 @@ export const BUILT_IN_NETWORKS = {
     chainId: CHAIN_IDS.LINEA_MAINNET,
     blockExplorerUrl: 'https://lineascan.build',
     ticker: CURRENCY_SYMBOLS.ETH,
+  },
+  [NETWORK_TYPES.AIA_MAINNET]: {
+    chainId: CHAIN_IDS.AIA_MAINNET,
+    blockExplorerUrl: 'https://www.aiascan.com/',
+    ticker: CURRENCY_SYMBOLS.AIA,
+  },
+  [NETWORK_TYPES.AIA_TESTNET]: {
+    chainId: CHAIN_IDS.AIA_TESTNET,
+    blockExplorerUrl: 'https://testnet.aiascan.com/',
+    ticker: CURRENCY_SYMBOLS.AIA,
   },
   [NETWORK_TYPES.LOCALHOST]: {
     chainId: CHAIN_IDS.LOCALHOST,
@@ -544,6 +575,8 @@ export const NETWORK_TO_NAME_MAP = {
   [NETWORK_TYPES.LINEA_MAINNET]: LINEA_MAINNET_DISPLAY_NAME,
   [NETWORK_TYPES.LOCALHOST]: LOCALHOST_DISPLAY_NAME,
   [NETWORK_TYPES.SEPOLIA]: SEPOLIA_DISPLAY_NAME,
+  [NETWORK_TYPES.AIA_MAINNET]: AIA_MAINNET_DISPLAY_NAME,
+  [NETWORK_TYPES.AIA_TESTNET]: AIA_TESTNET_DISPLAY_NAME,
 
   [CHAIN_IDS.ARBITRUM]: ARBITRUM_DISPLAY_NAME,
   [CHAIN_IDS.AVALANCHE]: AVALANCHE_DISPLAY_NAME,
@@ -564,6 +597,8 @@ export const NETWORK_TO_NAME_MAP = {
   [CHAIN_IDS.ZKSYNC_ERA]: ZK_SYNC_ERA_DISPLAY_NAME,
   [CHAIN_IDS.BERACHAIN]: BERACHAIN_DISPLAY_NAME,
   [CHAIN_IDS.METACHAIN_ONE]: METACHAIN_ONE_DISPLAY_NAME,
+  [CHAIN_IDS.AIA_MAINNET]: AIA_MAINNET_DISPLAY_NAME,
+  [CHAIN_IDS.AIA_TESTNET]: AIA_TESTNET_DISPLAY_NAME,
 } as const;
 
 export const CHAIN_ID_TO_CURRENCY_SYMBOL_MAP = {
@@ -681,6 +716,8 @@ export const CHAIN_ID_TO_CURRENCY_SYMBOL_MAP = {
     CHAINLIST_CURRENCY_SYMBOLS_MAP.ACALA_NETWORK,
   [CHAINLIST_CHAIN_IDS_MAP.IOTEX_MAINNET]:
     CHAINLIST_CURRENCY_SYMBOLS_MAP.IOTEX_MAINNET,
+  [CHAINLIST_CHAIN_IDS_MAP.AIA_TESTNET]: CHAINLIST_CURRENCY_SYMBOLS_MAP.AIA,
+  [CHAINLIST_CHAIN_IDS_MAP.AIA_MAINNET]: CHAINLIST_CURRENCY_SYMBOLS_MAP.AIA,
 } as const;
 
 /**
@@ -708,6 +745,8 @@ export const CHAIN_ID_TO_TYPE_MAP = {
   [CHAIN_IDS.LINEA_SEPOLIA]: NETWORK_TYPES.LINEA_SEPOLIA,
   [CHAIN_IDS.LINEA_MAINNET]: NETWORK_TYPES.LINEA_MAINNET,
   [CHAIN_IDS.LOCALHOST]: NETWORK_TYPES.LOCALHOST,
+  [CHAIN_IDS.AIA_TESTNET]: NETWORK_TYPES.AIA_TESTNET,
+  [CHAIN_IDS.AIA_MAINNET]: NETWORK_TYPES.AIA_MAINNET,
 } as const;
 
 export const CHAIN_ID_TO_RPC_URL_MAP = {
@@ -718,9 +757,13 @@ export const CHAIN_ID_TO_RPC_URL_MAP = {
   [CHAIN_IDS.MAINNET]: MAINNET_RPC_URL,
   [CHAIN_IDS.LINEA_MAINNET]: LINEA_MAINNET_RPC_URL,
   [CHAIN_IDS.LOCALHOST]: LOCALHOST_RPC_URL,
+  [CHAIN_IDS.AIA_TESTNET]: AIA_TESTNET_RPC_URL,
+  [CHAIN_IDS.AIA_MAINNET]: AIA_MAINNET_RPC_URL,
 } as const;
 
 export const CHAIN_ID_TO_NETWORK_IMAGE_URL_MAP = {
+  [CHAIN_IDS.AIA_TESTNET]: AIA_TESTNET_TOKEN_IMAGE_URL,
+  [CHAIN_IDS.AIA_MAINNET]: AIA_MAINNET_TOKEN_IMAGE_URL,
   [CHAIN_IDS.MAINNET]: ETH_TOKEN_IMAGE_URL,
   [CHAIN_IDS.LINEA_GOERLI]: LINEA_GOERLI_TOKEN_IMAGE_URL,
   [CHAIN_IDS.LINEA_SEPOLIA]: LINEA_SEPOLIA_TOKEN_IMAGE_URL,
@@ -804,6 +847,8 @@ export const CHAIN_ID_TO_ETHERS_NETWORK_NAME_MAP = {
 } as const;
 
 export const CHAIN_ID_TOKEN_IMAGE_MAP = {
+  [CHAIN_IDS.AIA_TESTNET]: AIA_TESTNET_TOKEN_IMAGE_URL,
+  [CHAIN_IDS.AIA_MAINNET]: AIA_MAINNET_TOKEN_IMAGE_URL,
   [CHAIN_IDS.MAINNET]: ETH_TOKEN_IMAGE_URL,
   [CHAIN_IDS.TEST_ETH]: TEST_ETH_TOKEN_IMAGE_URL,
   [CHAIN_IDS.BSC]: BNB_TOKEN_IMAGE_URL,
@@ -861,6 +906,14 @@ export const ETHERSCAN_SUPPORTED_NETWORKS = {
   },
   [CHAIN_IDS.LINEA_MAINNET]: {
     domain: 'lineascan.build',
+    subdomain: defaultEtherscanSubdomainPrefix,
+  },
+  [CHAIN_IDS.AIA_TESTNET]: {
+    domain: 'testnet.aiascan.com',
+    subdomain: 'sepolia',
+  },
+  [CHAIN_IDS.AIA_MAINNET]: {
+    domain: 'www.aiascan.com',
     subdomain: defaultEtherscanSubdomainPrefix,
   },
   [CHAIN_IDS.BSC]: {
@@ -1085,6 +1138,7 @@ export const TEST_NETWORKS = [
   SEPOLIA_DISPLAY_NAME,
   LINEA_GOERLI_DISPLAY_NAME,
   LINEA_SEPOLIA_DISPLAY_NAME,
+  AIA_TESTNET_DISPLAY_NAME,
 ];
 
 export const TEST_NETWORK_IDS = [
@@ -1093,4 +1147,5 @@ export const TEST_NETWORK_IDS = [
   CHAIN_IDS.LINEA_GOERLI,
   CHAIN_IDS.LINEA_SEPOLIA,
   CHAIN_IDS.ARBITRUM_SEPOLIA,
+  CHAIN_IDS.AIA_TESTNET,
 ];

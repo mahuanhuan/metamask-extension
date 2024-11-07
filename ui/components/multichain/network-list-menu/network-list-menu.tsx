@@ -137,6 +137,7 @@ export const NetworkListMenu = ({ onClose }: { onClose: () => void }) => {
   const currentlyOnTestNetwork = (TEST_CHAINS as Hex[]).includes(
     currentChainId,
   );
+  console.log(networkConfigurations, 'networkConfigurations22222');
   const [nonTestNetworks, testNetworks] = useMemo(
     () =>
       Object.entries(networkConfigurations).reduce(
