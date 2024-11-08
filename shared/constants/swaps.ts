@@ -321,6 +321,7 @@ export const OPTIMISM = 'optimism';
 export const ARBITRUM = 'arbitrum';
 export const ZKSYNC_ERA = 'zksync';
 export const LINEA = 'linea';
+export const AIA = 'aia';
 export const BASE = 'base';
 
 export const SWAPS_CLIENT_ID = 'extension';

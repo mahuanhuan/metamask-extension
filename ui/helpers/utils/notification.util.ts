@@ -14,7 +14,7 @@ import {
   LINEA_GOERLI_RPC_URL,
   LINEA_SEPOLIA_RPC_URL,
   LINEA_MAINNET_RPC_URL,
-  LOCALHOST_RPC_URL,
+  LOCALHOST_RPC_URL, AIA_TESTNET_RPC_URL, AIA_MAINNET_RPC_URL,
 } from '../../../shared/constants/network';
 import { SUPPORTED_NOTIFICATION_BLOCK_EXPLORERS } from '../constants/metamask-notifications/metamask-notifications';
 import { calcTokenAmount } from '../../../shared/lib/transactions-controller-utils';
@@ -397,6 +397,10 @@ export function getRpcUrlByChainId(chainId: HexChainId): string {
       return LINEA_SEPOLIA_RPC_URL;
     case CHAIN_IDS.LINEA_MAINNET:
       return LINEA_MAINNET_RPC_URL;
+    case CHAIN_IDS.AIA_MAINNET:
+      return AIA_MAINNET_RPC_URL;
+    case CHAIN_IDS.AIA_TESTNET:
+      return AIA_TESTNET_RPC_URL;
     case CHAIN_IDS.LOCALHOST:
       return LOCALHOST_RPC_URL;
     default:

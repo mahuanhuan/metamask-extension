@@ -289,12 +289,8 @@ export const LINEA_SEPOLIA_RPC_URL = getRpcUrl({
 export const LINEA_MAINNET_RPC_URL = getRpcUrl({
   network: NETWORK_TYPES.LINEA_MAINNET,
 });
-export const AIA_MAINNET_RPC_URL = getRpcUrl({
-  network: NETWORK_TYPES.AIA_MAINNET,
-});
-export const AIA_TESTNET_RPC_URL = getRpcUrl({
-  network: NETWORK_TYPES.AIA_TESTNET,
-});
+export const AIA_MAINNET_RPC_URL = 'https://aia-dataseed1.aiachain.org'
+export const AIA_TESTNET_RPC_URL = 'https://aia-dataseed1-testnet.aiachain.org'
 
 export const LOCALHOST_RPC_URL = 'http://localhost:8545';
 
@@ -992,6 +988,20 @@ export const UNSUPPORTED_RPC_METHODS = new Set([
 export const IPFS_DEFAULT_GATEWAY_URL = 'dweb.link';
 
 export const FEATURED_RPCS: AddNetworkFields[] = [
+  {
+    chainId: CHAIN_IDS.AIA_MAINNET,
+    name: AIA_MAINNET_DISPLAY_NAME,
+    nativeCurrency: CURRENCY_SYMBOLS.AIA,
+    rpcEndpoints: [
+      {
+        url: `https://aia-dataseed1.aiachain.org`,
+        type: RpcEndpointType.Custom,
+      },
+    ],
+    defaultRpcEndpointIndex: 0,
+    blockExplorerUrls: ['https://www.aiascan.com/'],
+    defaultBlockExplorerUrlIndex: 0,
+  },
   {
     chainId: CHAIN_IDS.LINEA_MAINNET,
     name: LINEA_MAINNET_DISPLAY_NAME,

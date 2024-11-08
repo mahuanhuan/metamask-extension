@@ -103,10 +103,12 @@ export function isDefaultMetaMaskChain(chainId) {
     !chainId ||
     chainId === CHAIN_IDS.MAINNET ||
     chainId === CHAIN_IDS.LINEA_MAINNET ||
+    chainId === CHAIN_IDS.AIA_MAINNET ||
     chainId === CHAIN_IDS.GOERLI ||
     chainId === CHAIN_IDS.SEPOLIA ||
     chainId === CHAIN_IDS.LINEA_GOERLI ||
     chainId === CHAIN_IDS.LINEA_SEPOLIA ||
+    chainId === CHAIN_IDS.AIA_TESTNET ||
     chainId === CHAIN_IDS.LOCALHOST
   ) {
     return true;

@@ -21,7 +21,7 @@ import {
   SWAPS_CHAINID_DEFAULT_TOKEN_MAP,
   SWAPS_CLIENT_ID,
   SWAPS_DEV_API_V2_BASE_URL,
-  SwapsTokenObject,
+  SwapsTokenObject, AIA,
 } from '../../../shared/constants/swaps';
 import {
   isSwapsDefaultTokenAddress,
@@ -695,6 +695,8 @@ export const getNetworkNameByChainId = (chainId: string): string => {
       return LINEA;
     case CHAIN_IDS.BASE:
       return BASE;
+    case CHAIN_IDS.AIA_MAINNET:
+      return AIA;
     default:
       return '';
   }
