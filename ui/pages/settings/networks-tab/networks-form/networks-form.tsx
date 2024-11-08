@@ -268,6 +268,7 @@ export const NetworksForm = ({
           };
           await dispatch(updateNetwork(networkPayload, options));
         } else {
+          console.log(networkPayload, 'networkPayload========');
           await dispatch(addNetwork(networkPayload));
         }
 

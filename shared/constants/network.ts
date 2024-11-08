@@ -994,7 +994,7 @@ export const FEATURED_RPCS: AddNetworkFields[] = [
     nativeCurrency: CURRENCY_SYMBOLS.AIA,
     rpcEndpoints: [
       {
-        url: `https://aia-dataseed1.aiachain.org`,
+        url: AIA_MAINNET_RPC_URL,
         type: RpcEndpointType.Custom,
       },
     ],
