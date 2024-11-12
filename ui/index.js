@@ -19,6 +19,11 @@ import { COPY_OPTIONS } from '../shared/constants/copy';
 import switchDirection from '../shared/lib/switch-direction';
 import { setupLocale } from '../shared/lib/error-utils';
 import { trace, TraceName } from '../shared/lib/trace';
+import {
+  AIA_MAINNET_RPC_URL,
+  AIA_TESTNET_RPC_URL,
+  CHAIN_IDS,
+} from '../shared/constants/network';
 import * as actions from './store/actions';
 import configureStore from './store/store';
 import {
@@ -40,7 +45,6 @@ import Root from './pages';
 import txHelper from './helpers/utils/tx-helper';
 import { setBackgroundConnection } from './store/background-connection';
 import { getStartupTraceTags } from './helpers/utils/tags';
-import { AIA_MAINNET_RPC_URL, AIA_TESTNET_RPC_URL, CHAIN_IDS } from '../shared/constants/network';
 import { addNetwork } from './store/actions';
 
 log.setLevel(global.METAMASK_DEBUG ? 'debug' : 'warn', false);
@@ -158,39 +162,43 @@ export async function setupInitialStore(
 
   // 检查并添加 AIA TESTNET 配置
   if (!metamaskState.networkConfigurationsByChainId?.[CHAIN_IDS.AIA_TESTNET]) {
-    await store.dispatch(actions.addNetwork({
-      chainId: CHAIN_IDS.AIA_TESTNET,
-      name: 'AIA TESTNET',
-      nativeCurrency: 'AIA',
-      rpcEndpoints: [
-        {
-          name: 'aia rpc',
-          type: 'custom',
-          url: AIA_TESTNET_RPC_URL,
-        },
-      ],
-      defaultRpcEndpointIndex: 0,
-      blockExplorerUrls: ['https://testnet.aiascan.com/'],
-      defaultBlockExplorerUrlIndex: 0,
-    }));
+    await store.dispatch(
+      actions.addNetwork({
+        chainId: CHAIN_IDS.AIA_TESTNET,
+        name: 'AIA TESTNET',
+        nativeCurrency: 'AIA',
+        rpcEndpoints: [
+          {
+            name: 'aia rpc',
+            type: 'custom',
+            url: AIA_TESTNET_RPC_URL,
+          },
+        ],
+        defaultRpcEndpointIndex: 0,
+        blockExplorerUrls: ['https://testnet.aiascan.com/'],
+        defaultBlockExplorerUrlIndex: 0,
+      }),
+    );
   }
   // 检查并添加 AIA TESTNET 配置
   if (!metamaskState.networkConfigurationsByChainId?.[CHAIN_IDS.AIA_MAINNET]) {
-    await store.dispatch(actions.addNetwork({
-      chainId: CHAIN_IDS.AIA_MAINNET,
-      name: 'AIA MAINNET',
-      nativeCurrency: 'AIA',
-      rpcEndpoints: [
-        {
-          name: 'aia rpc',
-          type: 'custom',
-          url: AIA_MAINNET_RPC_URL,
-        },
-      ],
-      defaultRpcEndpointIndex: 0,
-      blockExplorerUrls: ['https://www.aiascan.com/'],
-      defaultBlockExplorerUrlIndex: 0,
-    }));
+    await store.dispatch(
+      actions.addNetwork({
+        chainId: CHAIN_IDS.AIA_MAINNET,
+        name: 'AIA MAINNET',
+        nativeCurrency: 'AIA',
+        rpcEndpoints: [
+          {
+            name: 'aia rpc',
+            type: 'custom',
+            url: AIA_MAINNET_RPC_URL,
+          },
+        ],
+        defaultRpcEndpointIndex: 0,
+        blockExplorerUrls: ['https://www.aiascan.com/'],
+        defaultBlockExplorerUrlIndex: 0,
+      }),
+    );
   }
 
   const unapprovedTxs = getUnapprovedTransactions(metamaskState);
