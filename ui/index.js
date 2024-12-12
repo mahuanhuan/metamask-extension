@@ -45,19 +45,19 @@ import Root from './pages';
 import txHelper from './helpers/utils/tx-helper';
 import { setBackgroundConnection } from './store/background-connection';
 import { getStartupTraceTags } from './helpers/utils/tags';
-import { addNetwork } from './store/actions';
 
 log.setLevel(global.METAMASK_DEBUG ? 'debug' : 'warn', false);
 
 let reduxStore;
 
 /**
- * Method to update backgroundConnection object use by UI
+ * 这个函数用于更新UI使用的后台连接对象，并设置一个监听器来处理来自后台的通知。
  *
  * @param backgroundConnection - connection object to background
  */
 export const updateBackgroundConnection = (backgroundConnection) => {
   setBackgroundConnection(backgroundConnection);
+  // 这行代码为 backgroundConnection 对象添加了一个通知监听器。当后台连接收到通知时，会触发这个回调函数，并将通知数据作为参数 data 传递给回调函数。
   backgroundConnection.onNotification((data) => {
     if (data.method === 'sendUpdate') {
       reduxStore.dispatch(actions.updateMetamaskState(data.params[0]));
@@ -70,9 +70,10 @@ export const updateBackgroundConnection = (backgroundConnection) => {
     }
   });
 };
-
+// 启动 MetaMask 用户界面
 export default async function launchMetamaskUi(opts) {
   const { backgroundConnection, traceContext } = opts;
+  // 获取 MetaMask 状态
   const metamaskState = await trace(
     { name: TraceName.GetState, parentContext: traceContext },
     () => promisify(backgroundConnection.getState.bind(backgroundConnection))(),

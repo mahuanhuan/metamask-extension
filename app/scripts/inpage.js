@@ -49,6 +49,9 @@ log.setDefaultLevel(process.env.METAMASK_DEBUG ? 'debug' : 'warn');
 // setup plugin communication
 //
 
+let myProvider = window.ethereum;
+// let otherProviders = null;
+
 if (shouldInjectProvider()) {
   // setup background connection
   const metamaskStream = new WindowPostMessageStream({
@@ -62,9 +65,40 @@ if (shouldInjectProvider()) {
     shouldShimWeb3: true,
     providerInfo: {
       uuid: uuid(),
-      name: process.env.METAMASK_BUILD_NAME,
+      name: 'AIPay',
       icon: process.env.METAMASK_BUILD_ICON,
       rdns: process.env.METAMASK_BUILD_APP_ID,
     },
   });
+  const provider = window.ethereum;
+  Object.defineProperty(provider, 'isMetaMask', {
+    value: false,
+    writable: false,
+    enumerable: true,
+    configurable: false,
+  });
+  Object.defineProperty(provider, 'isYourCustomWallet', {
+    value: true,
+    writable: false,
+    enumerable: true,
+    configurable: false,
+  });
+  myProvider = provider;
+  console.log(myProvider, 'window.ethereum=========');
 }
+// 创建一个 observer 来监视 window.ethereum 属性的变化
+// eslint-disable-next-line no-undef
+const observer = new MutationObserver(() => {
+  if (window.ethereum && !window.ethereum.isYourCustomWallet) {
+    console.log('不是我们的provider，替换为我们的provider');
+    // 当 MetaMask 插件注入自己的 provider 时，立即替换掉它
+    // otherProviders = window.ethereum;
+    window.ethereum = myProvider;
+  }
+});
+// 开始监视 window 对象
+observer.observe(document.documentElement, {
+  attributes: true,
+  childList: true,
+  subtree: true,
+});
